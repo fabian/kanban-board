@@ -8,8 +8,19 @@
     <body>
         <h1>Kanban Board</h1>
 
+        <div id="app">
+        </div>
+
+        <script type="text/template" id="card-template">
+            <p class="card"><%- title %></p>
+        </script>
+
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/backbone/backbone.js"></script>
+        <script src="js/models/cards.js"></script>
+        <script src="js/views/app.js"></script>
+        <script src="js/views/cards.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
