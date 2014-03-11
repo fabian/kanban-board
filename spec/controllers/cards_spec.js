@@ -4,9 +4,11 @@ require('jasmine-expect');
 
 var controller = require('../../controllers/cards');
 
-var app = {};
-app.models = {};
-app.Card = {
+var app = {
+    models: {}
+};
+
+app.models.Card = {
     list: function () {
         return [
             {},
@@ -18,6 +20,7 @@ app.Card = {
 var request = {
     app: app
 };
+
 var response = {
     body: {},
     send: function (body) {
