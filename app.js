@@ -12,7 +12,8 @@ app.use(express.urlencoded());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-// load routes
+// load routes and models
+require('./models')(app);
 require('./routes')(app);
 
 app.listen(app.get('port'), function() {
