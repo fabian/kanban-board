@@ -8,3 +8,10 @@ exports.list = function(req, res) {
         cards: cards
     });
 };
+
+exports.create = function(req, res) {
+
+    var card = req.app.models.Card.create(req.body);
+
+    res.send(card);
+};
