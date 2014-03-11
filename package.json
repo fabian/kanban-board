@@ -7,6 +7,10 @@
     "bower": "1.2.x"
   },
   "scripts": {
-      "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "./node_modules/bower/bin/bower install"
+  },
+  "devDependencies": {
+    "jasmine-node": "~1.14.2",
+    "jasmine-expect": "~1.21.0"
   }
 }
