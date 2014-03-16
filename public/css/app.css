@@ -1,7 +1,45 @@
-.header {
-    padding: 1em;
+body {
+    margin-bottom: 2em;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 .pure-button,
+h2 .pure-button {
+    font-weight: normal;
+    vertical-align: top;
+}
+
+.button-small {
+    font-size: 0.6em;
+}
+
+.button-delete {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #ca3c3c;
+}
+
+.button-actions {
+    text-align: right;
 }
 
 .content {
     padding: 0 1em;
+}
+
+.card {
+    color: #0074d9;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 0 1em 0.5em 0;
+    padding: 1em 0.8em 1.1em 0.8em;
+}
+
+.card:hover {
+    border-color: #bbb;
 }

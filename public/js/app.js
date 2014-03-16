@@ -5,6 +5,8 @@ $(function () {
 
     app.cards = new app.CardList();
 
-    new app.AppView();
+    new app.AppRouter();
+
+    Backbone.history.start();
 
 });
