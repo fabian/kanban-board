@@ -29,7 +29,7 @@ h2 .pure-button {
 
 .header {
     height: 4em;
-    padding: 1em 0 0 1em;
+    padding: 1em 1em 0 1em;
     border-bottom: 1px solid #ccc;
 }
 
@@ -37,9 +37,7 @@ h2 .pure-button {
     font-weight: normal;
 }
 
-.content {
-}
-
+.form,
 .stack {
     padding: 1em;
 }
