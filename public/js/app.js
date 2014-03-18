@@ -5,8 +5,11 @@ $(function () {
 
     app.cards = new app.CardList();
 
-    new app.AppRouter();
-
-    Backbone.history.start();
-
+    app.cards.fetch({
+        reset: true,
+        success: function () {
+            app.router = new app.AppRouter();
+            Backbone.history.start();
+        }
+    });
 });

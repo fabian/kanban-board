@@ -1,10 +1,20 @@
 
 var database = [
     {
-        title: 'As a user I see changes by another user instantly'
+        id: 1,
+        title: 'As a user I see changes by another user instantly',
+        description: '',
+        person: '',
+        status: 'todo',
+        estimate: '1'
     },
     {
-        title: 'As a user I can delete a card'
+        id: 2,
+        title: 'As a user I can delete a card',
+        description: '',
+        person: '',
+        status: 'todo',
+        estimate: '1'
     }
 ];
 
@@ -16,8 +26,27 @@ Card.list = function () {
     return database;
 };
 
+Card.get = function (id) {
+    var card = null;
+    database.forEach(function (c) {
+        if (c.id == id) {
+            card = c;
+        }
+    });
+    return card;
+};
+
+Card.update = function (card) {
+    database.forEach(function (c, i) {
+        if (c.id == card.id) {
+            database[i] = card;
+        }
+    });
+};
+
 Card.create = function (card) {
 
+    card.id = database.length + 1;
     database.push(card);
 
     return card;

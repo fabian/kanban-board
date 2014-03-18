@@ -67,27 +67,27 @@
                                 <div class="pure-g">
                                     <div class="pure-u-1-2">
                                         <select id="status">
-                                            <option disabled selected>Status</option>
-                                            <option>Todo</option>
-                                            <option>In Progress</option>
-                                            <option>Done</option>
+                                            <option value="" disabled selected>Status</option>
+                                            <option value="todo">Todo</option>
+                                            <option value="in_progress">In Progress</option>
+                                            <option value="done">Done</option>
                                         </select>
                                     </div>
                                     <div class="pure-u-1-2">
                                         <select id="estimate">
-                                            <option disabled selected>Estimate</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>5</option>
-                                            <option>8</option>
+                                            <option value="" disabled selected>Estimate</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="5">5</option>
+                                            <option value="8">8</option>
                                         </select>
                                     </div>
                                 </div>
                             </fieldset>
                             <div class="pure-g">
                                 <div class="pure-u-1-2">
-                                    <p><button class="pure-button pure-button-primary">Save Card</button></p>
+                                    <p><a class="pure-button pure-button-primary" id="save-card">Save Card</a></p>
                                 </div>
                                 <div class="pure-u-1-2">
                                     <p class="button-actions"><a href="#" class="pure-button">Cancel</a></p>
@@ -101,13 +101,14 @@
         </script>
 
         <script type="text/template" id="card-template">
-            <a href="#add" class="card"><%- title %></a>
+            <a href="#cards/<%- id %>" class="card"><%- title %></a>
         </script>
 
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/backbone/backbone.js"></script>
         <script src="js/models/cards.js"></script>
+        <script src="js/routers/app.js"></script>
         <script src="js/views/app.js"></script>
         <script src="js/views/cards.js"></script>
         <script src="js/app.js"></script>
