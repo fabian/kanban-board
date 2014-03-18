@@ -10,14 +10,11 @@ var app = app || {};
         }
     });
 
-    app.AddCardView = Backbone.View.extend({
-        el: '#app',
+    app.CardFormView = Backbone.View.extend({
         template: _.template($('#card-form-template').html()),
         events: {
             'click #save-card': 'saveCard',
             'click #delete-card': 'deleteCard',
-        },
-        initialize: function () {
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
@@ -33,9 +30,11 @@ var app = app || {};
             this.model.set('person', this.$('#person').val());
             this.model.set('status', this.$('#status').val());
             this.model.set('estimate', this.$('#estimate').val());
+            if (this.model.isNew()) {
+                app.cards.add(this.model);
+            }
             this.model.save({}, {
                 success: function (model) {
-                    app.cards.add(model);
                     app.router.navigate('', {trigger: true});
                 }
             });

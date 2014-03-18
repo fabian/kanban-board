@@ -4,7 +4,6 @@ var app = app || {};
     "use scrict";
 
     app.Card = Backbone.Model.extend({
-        urlRoot: 'cards'
     });
 
     app.CardList = Backbone.Collection.extend({       

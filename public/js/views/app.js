@@ -4,7 +4,6 @@ var app = app || {};
     "use strict";
 
     app.IndexView = Backbone.View.extend({
-        el: '#app',
         events: {
             'click #add-card': 'createCard'
         },

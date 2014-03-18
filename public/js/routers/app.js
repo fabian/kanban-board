@@ -11,25 +11,34 @@ var app = app || {};
         },
 
         initialize: function () {
-            this.indexView = new app.IndexView();
         },
 
         index: function() {
-            this.indexView.render();
+            this.render(new app.IndexView());
         },
 
         addCard: function() {
-            var view = new app.AddCardView({
+            this.render(new app.CardFormView({
                 model: new app.Card()
-            });
-            view.render();
+            }));
         },
 
         editCard: function(id) {
-            var view = new app.AddCardView({
+            this.render(new app.CardFormView({
                 model: app.cards.get(id)
-            });
+            }));
+        },
+
+        render: function (view) {
+
+            if (this.currentView) {
+                this.currentView.remove();
+            }
+
             view.render();
+            $('#app').html(view.el);
+
+            this.currentView = view;
         }
     });
 
