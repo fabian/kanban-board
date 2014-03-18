@@ -21,8 +21,6 @@
                         <h2 class="header-title">Todo <a href="#add" class="pure-button pure-button-primary button-small">Add Card</a></h2>
                     </div>
                     <div class="stack" id="stack-todo">
-                        <a href="#add" class="card">As a user I see changes by another user instantly</a>
-                        <a href="#add" class="card">As a user I can delete a card</a>
                     </div>
                 </div>
                 <div class="pure-u-1-3">
@@ -30,7 +28,6 @@
                         <h2 class="header-title">In Progress</h2>
                     </div>
                     <div class="stack" id="stack-progress">
-                        <a href="#add" class="card">As a user I see changes by another user instantly</a>
                     </div>
                 </div>
                 <div class="pure-u-1-3">
@@ -38,7 +35,6 @@
                         <h2 class="header-title">Done</h2>
                     </div>
                     <div class="stack" id="stack-done">
-                        <a href="#add" class="card">As a user I see changes by another user instantly</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +50,7 @@
                                 <h2 class="header-title">New Card</h2>
                             </div>
                             <div class="pure-u-1-2">
-                                <p class="button-actions"><a href="#" class="pure-button button-delete">Delete Card</a></p>
+                                <p class="button-actions"><a id="delete-card" class="pure-button button-delete">Delete Card</a></p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +97,13 @@
         </script>
 
         <script type="text/template" id="card-template">
-            <a href="#cards/<%- id %>" class="card"><%- title %></a>
+            <a href="#cards/<%- id %>" class="card">
+                <% if (title) { %>
+                    <%- title %>
+                <% } else { %>
+                    <em>Untitled</em>
+                <% } %>
+            </a>
         </script>
 
         <script src="bower_components/jquery/dist/jquery.min.js"></script>

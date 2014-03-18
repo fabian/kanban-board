@@ -44,6 +44,14 @@ Card.update = function (card) {
     });
 };
 
+Card.remove = function (card) {
+    database.forEach(function (c, i) {
+        if (c.id == card.id) {
+            database.splice(i, 1);
+        }
+    });
+};
+
 Card.create = function (card) {
 
     card.id = database.length + 1;

@@ -10,15 +10,17 @@ var app = app || {};
         },
         render: function () {
             this.$el.html(_.template($('#index-template').html()));
-            this.addAll();
-        },
-        addOne: function (card) {
-            var cardView = new app.CardView({model: card});
-            cardView.render();
-            this.$('#stack-todo').append(cardView.el);
-        },
-        addAll: function () {
-            app.cards.each(this.addOne, this);
+            app.cards.each(function (card) {
+                var cardView = new app.CardView({model: card});
+                cardView.render();
+                if (card.get('status') == 'in_progress') {
+                    this.$('#stack-progress').append(cardView.el);
+                } else if (card.get('status') == 'done') {
+                    this.$('#stack-done').append(cardView.el);
+                } else {
+                    this.$('#stack-todo').append(cardView.el);
+                }
+            }, this);
         }
     });
 

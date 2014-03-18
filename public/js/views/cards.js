@@ -14,7 +14,8 @@ var app = app || {};
         el: '#app',
         template: _.template($('#card-form-template').html()),
         events: {
-            'click #save-card': 'saveCard'
+            'click #save-card': 'saveCard',
+            'click #delete-card': 'deleteCard',
         },
         initialize: function () {
         },
@@ -35,6 +36,13 @@ var app = app || {};
             this.model.save({}, {
                 success: function (model) {
                     app.cards.add(model);
+                    app.router.navigate('', {trigger: true});
+                }
+            });
+        },
+        deleteCard: function (event) {
+            this.model.destroy({
+                success: function (model) {
                     app.router.navigate('', {trigger: true});
                 }
             });

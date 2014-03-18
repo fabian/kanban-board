@@ -40,6 +40,20 @@ exports.update = function(req, res) {
     }
 };
 
+exports.remove = function(req, res) {
+
+    var card = req.app.models.Card.get(req.params.id);
+
+    if (card) {
+
+        req.app.models.Card.remove(card);
+
+        res.send(204);
+    } else { 
+        res.send(404);
+    }
+};
+
 exports.create = function(req, res) {
 
     var card = req.app.models.Card.create(req.body);
