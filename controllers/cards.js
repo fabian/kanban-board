@@ -2,61 +2,77 @@
 
 exports.list = function(req, res) {
 
-    var cards = req.app.models.Card.list();
+    req.app.cards.list(function (cards) {
 
-    res.send({
-        cards: cards
+        res.send({
+            cards: cards
+        });
     });
 };
 
 exports.get = function(req, res) {
 
-    var card = req.app.models.Card.get(req.params.id);
+    req.app.cards.get(req.params.id, function (cards) {
 
-    if (card) {
-        res.send(card);
-    } else { 
-        res.send(404);
-    }
+        if (cards.length == 1) {
+            res.send(cards[0]);
+        } else {
+            res.send(404);
+        }
+    });
 };
 
 exports.update = function(req, res) {
 
-    var card = req.app.models.Card.get(req.params.id);
+    req.app.cards.get(req.params.id, function (cards) {
 
-    if (card) {
+        if (cards.length == 1) {
 
-        card.title = req.body.title;
-        card.description = req.body.description;
-        card.person = req.body.person;
-        card.status = req.body.status;
-        card.estimate = req.body.estimate;
+            var card = cards[0];
 
-        req.app.models.Card.update(card);
+            card.title = req.body.title;
+            card.description = req.body.description;
+            card.person = req.body.person;
+            card.status = req.body.status;
+            card.estimate = req.body.estimate;
 
-        res.send(card);
-    } else { 
-        res.send(404);
-    }
+            req.app.cards.update(card);
+
+            res.send(card);
+
+        } else {
+            res.send(404);
+        }
+    });
 };
 
 exports.remove = function(req, res) {
 
-    var card = req.app.models.Card.get(req.params.id);
+    req.app.cards.get(req.params.id, function (cards) {
 
-    if (card) {
+        if (cards.length == 1) {
 
-        req.app.models.Card.remove(card);
+            req.app.cards.remove(cards[0]);
 
-        res.send(204);
-    } else { 
-        res.send(404);
-    }
+            res.send(204)
+
+        } else {
+            res.send(404);
+        }
+    });
 };
 
 exports.create = function(req, res) {
 
-    var card = req.app.models.Card.create(req.body);
+    var card = {};
 
-    res.send(card);
+    card.title = req.body.title;
+    card.description = req.body.description;
+    card.person = req.body.person;
+    card.status = req.body.status;
+    card.estimate = req.body.estimate;
+
+    req.app.cards.create(card, function (cards) {
+        res.send(cards[0]);
+    });
 };

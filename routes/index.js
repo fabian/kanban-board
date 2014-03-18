@@ -9,5 +9,4 @@ module.exports = function(app) {
     app.put('/cards/:id', cards.update);
     app.delete('/cards/:id', cards.remove);
     app.post('/cards', cards.create);
-
 };

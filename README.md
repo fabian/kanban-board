@@ -13,3 +13,10 @@ npm install
 ```
 npm test
 ```
+
+## Development
+
+```
+node app.js
+```
+

@@ -1,9 +1,11 @@
 "use strict";
 
+var Cards = require('./Cards'),
+    Database = require('./Database');
+
 module.exports = function(app) {
 
-    app.models = {};
+    app.database = new Database(app.get('database_url'));
 
-    app.models.Card = require('./Card');
-
+    app.cards = new Cards(app.database);
 };

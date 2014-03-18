@@ -6,6 +6,7 @@ var app = express(),
     path = require('path');
 
 app.set('port', process.env.PORT || 3000);
+app.set('database_url', process.env.DATABASE_URL || 'postgres://localhost/kanban');
 
 app.use(express.json());
 app.use(express.urlencoded());

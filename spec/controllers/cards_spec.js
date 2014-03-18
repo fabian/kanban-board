@@ -4,16 +4,14 @@ require('jasmine-expect');
 
 var controller = require('../../controllers/cards');
 
-var app = {
-    models: {}
-};
+var app = {};
 
-app.models.Card = {
-    list: function () {
-        return [
-            {},
-            {}
-        ];
+app.cards = {
+    list: function (callback) {
+        callback([
+            {id: 1, title: 'First'},
+            {id: 2, title: 'Second'}
+        ]);
     }
 };
 
