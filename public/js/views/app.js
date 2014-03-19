@@ -10,6 +10,23 @@ var app = app || {};
         },
         initialize: function (options) {
             this.board = options.board;
+            this.socket = new WebSocket(location.origin.replace(/^http/, 'ws'));
+            this.socket.onopen = _.bind(function () {
+                this.socket.send(this.board);
+            }, this);
+            this.socket.onmessage = _.bind(function (event) {
+                var data = JSON.parse(event.data);
+                if (data.action == 'create') {
+                    this.model.add(new app.Card(data.card));
+                } else if (data.action == 'update') {
+                   var card = this.model.get(data.card.id);
+                   card.set(data.card);
+                } else if (data.action == 'remove') {
+                    var card = this.model.get(data.card.id);
+                    this.model.remove(card);
+                }
+                this.render();
+            }, this);
         },
         render: function () {
             this.$el.html(this.template({board: this.board}));
@@ -32,6 +49,10 @@ var app = app || {};
             } else {
                 this.$('.message-no-cards').show();
             }
+        },
+        remove: function () {
+            this.socket.close();
+            Backbone.View.prototype.remove.call(this, arguments);
         }
     });
 

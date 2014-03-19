@@ -38,6 +38,8 @@ exports.update = function(req, res) {
 
             req.app.cards.update(req.params.board, card);
 
+            req.app.push.send(req.params.board, 'update', card);
+
             res.send(card);
 
         } else {
@@ -53,6 +55,8 @@ exports.remove = function(req, res) {
         if (cards.length == 1) {
 
             req.app.cards.remove(req.params.board, cards[0]);
+
+            req.app.push.send(req.params.board, 'remove', cards[0]);
 
             res.send(204)
 
@@ -73,6 +77,9 @@ exports.create = function(req, res) {
     card.estimate = req.body.estimate;
 
     req.app.cards.create(req.params.board, card, function (cards) {
+
+        req.app.push.send(req.params.board, 'create', cards[0]);
+
         res.send(cards[0]);
     });
 };
