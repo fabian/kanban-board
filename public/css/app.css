@@ -37,6 +37,11 @@ h2 .pure-button {
     font-weight: normal;
 }
 
+.message-no-cards {
+    color: #bbb;
+    text-align: center;
+}
+
 .form,
 .stack {
     padding: 1em;
