@@ -20,3 +20,11 @@ npm test
 node app.js
 ```
 
+## Deployment
+
+```
+heroku addons:add heroku-postgresql:dev
+heroku config:set DATABASE_URL=postgres://...
+heroku pg:psql HEROKU_POSTGRESQL_BROWN_URL
+heroku labs:enable websockets
+```
