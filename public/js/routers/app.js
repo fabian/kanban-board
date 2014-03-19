@@ -3,42 +3,24 @@ var app = app || {};
 (function ($) {
     "use strict";
 
+    function randomBoard() {
+        var board = '';
+        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        for (var i = 0; i < 12; i++ ) {
+            board += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+
+        return board;
+    }
+
     app.AppRouter = Backbone.Router.extend({
         routes: {
-            '': 'index',
-            'add': 'addCard',
-            'cards/:id': 'editCard'
-        },
-
-        initialize: function () {
+            '': 'index'
         },
 
         index: function() {
-            this.render(new app.IndexView());
-        },
-
-        addCard: function() {
-            this.render(new app.CardFormView({
-                model: new app.Card()
-            }));
-        },
-
-        editCard: function(id) {
-            this.render(new app.CardFormView({
-                model: app.cards.get(id)
-            }));
-        },
-
-        render: function (view) {
-
-            if (this.currentView) {
-                this.currentView.remove();
-            }
-
-            view.render();
-            $('#app').html(view.el);
-
-            this.currentView = view;
+            this.navigate(randomBoard(), {trigger: true});
         }
     });
 

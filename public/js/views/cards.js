@@ -5,8 +5,13 @@ var app = app || {};
 
     app.CardView = Backbone.View.extend({
         template: _.template($('#card-template').html()),
+        initialize: function (options) {
+            this.board = options.board;
+        },
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
+            var data = this.model.toJSON();
+            data.board = this.board;
+            this.$el.html(this.template(data));
         }
     });
 
@@ -16,8 +21,14 @@ var app = app || {};
             'click #save-card': 'saveCard',
             'click #delete-card': 'deleteCard',
         },
+        initialize: function (options) {
+            this.board = options.board;
+            this.cards = options.cards;
+        },
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
+            var data = this.model.toJSON();
+            data.board = this.board;
+            this.$el.html(this.template(data));
             this.$('#title').val(this.model.get('title'));
             this.$('#description').val(this.model.get('description'));
             this.$('#person').val(this.model.get('person'));
@@ -31,19 +42,19 @@ var app = app || {};
             this.model.set('status', this.$('#status').val());
             this.model.set('estimate', this.$('#estimate').val());
             if (this.model.isNew()) {
-                app.cards.add(this.model);
+                this.cards.add(this.model);
             }
             this.model.save({}, {
-                success: function (model) {
-                    app.router.navigate('', {trigger: true});
-                }
+                success: _.bind(function (model) {
+                    Backbone.history.navigate(this.board, {trigger: true});
+                }, this)
             });
         },
         deleteCard: function (event) {
             this.model.destroy({
-                success: function (model) {
-                    app.router.navigate('', {trigger: true});
-                }
+                success: _.bind(function (model) {
+                    Backbone.history.navigate(this.board, {trigger: true});
+                }, this)
             });
         }
     });

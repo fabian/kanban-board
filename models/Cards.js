@@ -4,16 +4,17 @@ var Cards = function (database) {
     this.database = database;
 };
 
-Cards.prototype.list = function (callback) {
-    this.database.query('SELECT * FROM cards', [], callback);
+Cards.prototype.list = function (board, callback) {
+    this.database.query('SELECT id, title, description, person, status, estimate FROM cards WHERE board = $1', [board], callback);
 };
 
-Cards.prototype.get = function (id, callback) {
-    this.database.query('SELECT * FROM cards WHERE id = $1 LIMIT 1', [id], callback);
+Cards.prototype.get = function (board, id, callback) {
+    this.database.query('SELECT id, title, description, person, status, estimate FROM cards WHERE board = $1 AND id = $2 LIMIT 1', [board, id], callback);
 };
 
-Cards.prototype.update = function (card) {
-    this.database.query('UPDATE cards SET title = $2, description = $3, person = $4, status = $5, estimate = $6 WHERE id = $1', [
+Cards.prototype.update = function (board, card) {
+    this.database.query('UPDATE cards SET title = $3, description = $4, person = $5, status = $6, estimate = $7 WHERE board = $1 AND id = $2', [
+        board,
         card.id,
         card.title,
         card.description,
@@ -23,12 +24,13 @@ Cards.prototype.update = function (card) {
     ]);
 };
 
-Cards.prototype.remove = function (card) {
-    this.database.query('DELETE FROM cards WHERE id = $1', [card.id]);
+Cards.prototype.remove = function (board, card) {
+    this.database.query('DELETE FROM cards WHERE board = $1 AND id = $2', [board, card.id]);
 };
 
-Cards.prototype.create = function (card, callback) {
-    this.database.query('INSERT INTO cards (title, description, person, status, estimate) VALUES ($1, $2, $3, $4, $5) RETURNING id', [
+Cards.prototype.create = function (board, card, callback) {
+    this.database.query('INSERT INTO cards (board, title, description, person, status, estimate) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id', [
+        board,
         card.title,
         card.description,
         card.person,

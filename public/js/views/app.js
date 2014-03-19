@@ -4,13 +4,20 @@ var app = app || {};
     "use strict";
 
     app.IndexView = Backbone.View.extend({
+        template: _.template($('#index-template').html()),
         events: {
             'click #add-card': 'createCard'
         },
+        initialize: function (options) {
+            this.board = options.board;
+        },
         render: function () {
-            this.$el.html(_.template($('#index-template').html()));
-            app.cards.each(function (card) {
-                var cardView = new app.CardView({model: card});
+            this.$el.html(this.template({board: this.board}));
+            this.model.each(function (card) {
+                var cardView = new app.CardView({
+                    board: this.board,
+                    model: card
+                });
                 cardView.render();
                 if (card.get('status') == 'in_progress') {
                     this.$('#stack-progress').append(cardView.el);

@@ -2,7 +2,7 @@
 
 exports.list = function(req, res) {
 
-    req.app.cards.list(function (cards) {
+    req.app.cards.list(req.params.board, function (cards) {
 
         res.send({
             cards: cards
@@ -12,7 +12,7 @@ exports.list = function(req, res) {
 
 exports.get = function(req, res) {
 
-    req.app.cards.get(req.params.id, function (cards) {
+    req.app.cards.get(req.params.board, req.params.id, function (cards) {
 
         if (cards.length == 1) {
             res.send(cards[0]);
@@ -24,7 +24,7 @@ exports.get = function(req, res) {
 
 exports.update = function(req, res) {
 
-    req.app.cards.get(req.params.id, function (cards) {
+    req.app.cards.get(req.params.board, req.params.id, function (cards) {
 
         if (cards.length == 1) {
 
@@ -48,11 +48,11 @@ exports.update = function(req, res) {
 
 exports.remove = function(req, res) {
 
-    req.app.cards.get(req.params.id, function (cards) {
+    req.app.cards.get(req.params.board, req.params.id, function (cards) {
 
         if (cards.length == 1) {
 
-            req.app.cards.remove(cards[0]);
+            req.app.cards.remove(req.params.board, cards[0]);
 
             res.send(204)
 
@@ -72,7 +72,7 @@ exports.create = function(req, res) {
     card.status = req.body.status;
     card.estimate = req.body.estimate;
 
-    req.app.cards.create(card, function (cards) {
+    req.app.cards.create(req.params.board, card, function (cards) {
         res.send(cards[0]);
     });
 };

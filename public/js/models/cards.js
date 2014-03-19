@@ -8,7 +8,12 @@ var app = app || {};
 
     app.CardList = Backbone.Collection.extend({       
         model: app.Card,
-        url: 'cards',
+        initialize: function (models, options) {
+            this.board = options.board;
+        },
+        url: function () {
+            return this.board + '/cards';
+        },
         parse: function(response) {
             return response.cards;
         }
