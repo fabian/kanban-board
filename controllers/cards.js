@@ -36,7 +36,7 @@ exports.update = function(req, res) {
             card.status = req.body.status;
             card.estimate = req.body.estimate;
 
-            req.app.cards.update(card);
+            req.app.cards.update(req.params.board, card);
 
             res.send(card);
 
