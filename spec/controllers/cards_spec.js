@@ -7,7 +7,7 @@ var controller = require('../../controllers/cards');
 var app = {};
 
 app.cards = {
-    list: function (callback) {
+    list: function (board, callback) {
         callback([
             {id: 1, title: 'First'},
             {id: 2, title: 'Second'}
@@ -16,7 +16,10 @@ app.cards = {
 };
 
 var request = {
-    app: app
+    app: app,
+    params: {
+        board: 'Random'
+    }
 };
 
 var response = {
