@@ -29,7 +29,7 @@ Cards.prototype.remove = function (board, card) {
 };
 
 Cards.prototype.create = function (board, card, callback) {
-    this.database.query('INSERT INTO cards (board, title, description, person, status, estimate) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id', [
+    this.database.query('INSERT INTO cards (board, title, description, person, status, estimate) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, title, description, person, status, estimate', [
         board,
         card.title,
         card.description,
