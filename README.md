@@ -1,6 +1,6 @@
 # Kanban Board
 
-[![Build Status](https://travis-ci.org/fabian/kanban-board.png?branch=master)](https://travis-ci.org/fabian/kanban-board)
+[![Build Status](https://travis-ci.org/fabian/kanban-board.svg?branch=master)](https://travis-ci.org/fabian/kanban-board)
 
 ## Setup
 
