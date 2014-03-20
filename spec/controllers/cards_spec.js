@@ -76,9 +76,9 @@ describe('Cards Controller', function () {
     });
 
     describe('Update', function () {
-
+    
         it('updates card', function () {
-
+    
             app.cards.get = jasmine.createSpy().andCallFake(function (board, id, callback) {
                 callback([
                     {id: 1, title: 'Title'}
@@ -86,7 +86,7 @@ describe('Cards Controller', function () {
             });
             app.cards.update = jasmine.createSpy();
             app.push.send = jasmine.createSpy();
-
+    
             request.params.id = '1';
             request.body = {
                 title: 'New title',
@@ -95,9 +95,9 @@ describe('Cards Controller', function () {
                 status: 'todo',
                 estimate: '3'
             };
-
+    
             controller.update(request, response);
-
+    
             expect(response.body.title).toEqual('New title');
             expect(app.cards.get).toHaveBeenCalledWith('random', '1', jasmine.any(Function));
             expect(app.cards.update).toHaveBeenCalledWith('random', {
@@ -117,25 +117,25 @@ describe('Cards Controller', function () {
                 estimate: '3'
             });
         });
-
+    
         it('sends 404', function () {
-
+    
             app.cards.get = jasmine.createSpy().andCallFake(function (board, id, callback) {
                 callback([]);
             });
-
+    
             request.params.id = '999';
-
+    
             controller.update(request, response);
-
+    
             expect(response.body).toEqual(404);
         });
     });
-
+    
     describe('Remove', function () {
-
+    
         it('removes card', function () {
-
+    
             app.cards.get = jasmine.createSpy().andCallFake(function (board, id, callback) {
                 callback([
                     {id: 1}
@@ -143,42 +143,42 @@ describe('Cards Controller', function () {
             });
             app.cards.remove = jasmine.createSpy();
             app.push.send = jasmine.createSpy();
-
+    
             request.params.id = '1';
-
+    
             controller.remove(request, response);
-
+    
             expect(response.body).toEqual(204);
             expect(app.cards.get).toHaveBeenCalledWith('random', '1', jasmine.any(Function));
             expect(app.cards.remove).toHaveBeenCalledWith('random', {id: 1});
             expect(app.push.send).toHaveBeenCalledWith('random', 'remove', {id: 1});
         });
-
+    
         it('sends 404', function () {
-
+    
             app.cards.get = jasmine.createSpy().andCallFake(function (board, id, callback) {
                 callback([]);
             });
-
+    
             request.params.id = '999';
-
+    
             controller.remove(request, response);
-
+    
             expect(response.body).toEqual(404);
         });
     });
 
     describe('Create', function () {
-
+    
         it('creates card', function () {
-
+    
             app.cards.create = jasmine.createSpy().andCallFake(function (board, card, callback) {
                 callback([
                     {id: 1, title: 'New title'}
                 ]);
             });
             app.push.send = jasmine.createSpy();
-
+    
             request.body = {
                 title: 'Title',
                 description: 'Some text',
@@ -186,9 +186,9 @@ describe('Cards Controller', function () {
                 status: 'todo',
                 estimate: '3'
             };
-
+    
             controller.create(request, response);
-
+    
             expect(response.body.title).toEqual('New title');
             expect(app.cards.create).toHaveBeenCalledWith('random', {
                 title: 'Title',
