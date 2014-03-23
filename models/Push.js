@@ -19,7 +19,7 @@ Push.prototype.connect = function (ws) {
     }).bind(this));
 
     ws.on('close', (function() {
-        delete this.clients[id];
+        this.clients.splice(id, 1);
     }).bind(this));
 };
 
