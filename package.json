@@ -10,7 +10,7 @@
   },
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
-    "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/jasmine-node spec/"
+    "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/jasmine-node tests/"
   },
   "devDependencies": {
     "jasmine-node": "~1.14.2",
