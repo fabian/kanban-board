@@ -16,7 +16,7 @@
 
         <script type="text/template" id="index-template">
             <div class="pure-g-r">
-                <div class="pure-u-1-3">
+                <div class="pure-u-1-3 column-stack">
                     <div class="header">
                         <h2 class="header-title">Todo <a href="#<%- board %>/add" class="pure-button pure-button-primary button-small">Add Card</a></h2>
                     </div>
@@ -24,14 +24,14 @@
                         <p class="message-no-cards">No cards at all yet.</p>
                     </div>
                 </div>
-                <div class="pure-u-1-3">
+                <div class="pure-u-1-3 column-stack">
                     <div class="header">
                         <h2 class="header-title">In Progress</h2>
                     </div>
                     <div class="stack" id="stack-progress">
                     </div>
                 </div>
-                <div class="pure-u-1-3">
+                <div class="pure-u-1-3 column-stack">
                     <div class="header">
                         <h2 class="header-title">Done</h2>
                     </div>
@@ -98,7 +98,7 @@
         </script>
 
         <script type="text/template" id="card-template">
-            <a href="#<%- board %>/cards/<%- id %>" class="card">
+            <a href="#<%- board %>/cards/<%- id %>" class="card" draggable="true">
                 <% if (title) { %>
                     <%- title %>
                 <% } else { %>

@@ -11,6 +11,13 @@ var app = app || {};
         render: function () {
             var data = this.model.toJSON();
             data.board = this.board;
+            this.$el.bind('dragstart', function (e) {
+                var dataTransfer = e.originalEvent.dataTransfer;
+                dataTransfer.effectAllowed = 'move';
+                dataTransfer.setData('text/x-card', data.id);
+                dataTransfer.setDragImage(e.target, 30, 20);
+                return true;
+            });
             this.$el.html(this.template(data));
         }
     });

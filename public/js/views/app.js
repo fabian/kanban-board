@@ -29,7 +29,33 @@ var app = app || {};
             }, this);
         },
         render: function () {
+            var model = this.model;
             this.$el.html(this.template({board: this.board}));
+            this.$('.column-stack').bind('dragover dragenter', function (e) {
+                e.preventDefault();
+                $(this).addClass('column-stack-active');
+            });
+            this.$('.column-stack').bind('dragleave', function (e) {
+                e.preventDefault();
+                $(this).removeClass('column-stack-active');
+            });
+            this.$('.column-stack').bind('drop', function (e) {
+                e.preventDefault();
+                $(this).removeClass('column-stack-active');
+                var id = e.originalEvent.dataTransfer.getData('text/x-card'),
+                    card = model.get(id),
+                    stack = $('.stack', this).attr('id')
+                    status;
+                if (stack == 'stack-progress') {
+                    status = 'in_progress';
+                } else if (stack == 'stack-done') {
+                    status = 'done';
+                } else {
+                    status = 'todo';
+                }
+                card.set({status: status});
+                card.save();
+            });
             if (this.model.length > 0) {
                 this.$('.message-no-cards').hide();
                 this.model.each(function (card) {

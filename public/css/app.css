@@ -27,10 +27,32 @@ h2 .pure-button {
     text-align: right;
 }
 
+@media (min-width: 60em) {
+
+    .content {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    #app,
+    #app > div,
+    #app > div > .pure-g-r,
+    .column-stack {
+        height: 100%;
+    }
+}
+
 .header {
     height: 4em;
     padding: 1em 1em 0 1em;
     border-bottom: 1px solid #ccc;
+}
+
+.column-stack-active {
+    background-color: #efefef;
 }
 
 .header-title {
@@ -49,6 +71,7 @@ h2 .pure-button {
 
 .card {
     color: #0074d9;
+    background-color: #fff;
     display: block;
     border: 1px solid #ddd;
     border-radius: 4px;
