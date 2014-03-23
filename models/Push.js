@@ -10,7 +10,7 @@ var Push = function (wss) {
 
 Push.prototype.connect = function (ws) {
 
-    var id = ++this.id;
+    var id = this.id++;
 
     this.clients[id] = {board: null, socket: ws};
 
