@@ -10,6 +10,16 @@ All project dependencies are managed with npm, the node package manager. To down
 npm install
 ```
 
+## Development
+
+For local development install [PostgreSQL](http://www.postgresql.org/), import the SQL file [install.sql](./install.sql) and start the server with the following commands:
+
+```
+node app.js
+```
+
+The application is then available at [http://localhost:3000](http://localhost:3000/).
+
 ## Tests
 
 The code is tested with Jasmine, a behavior-driven development framework for testing JavaScript code.
@@ -18,12 +28,11 @@ The code is tested with Jasmine, a behavior-driven development framework for tes
 npm test
 ```
 
-## Development
-
-For local development install [PostgreSQL](http://www.postgresql.org/), import the SQL file [install.sql](./install.sql) and start the server with the following commands:
+To generate a code coverage report, run the test command with `--coverage`:
 
 ```
-node app.js
+npm test --coverage
+open coverage/lcov-report/index.html
 ```
 
 ## Deployment
