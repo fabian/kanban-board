@@ -8,7 +8,11 @@ var database = {};
 
 describe('Cards Model', function () {
 
-    var cards = new Cards(database);
+    var cards;
+
+    beforeEach(function() {
+        cards = new Cards(database);
+    });
 
     describe('List', function () {
 
@@ -51,7 +55,7 @@ describe('Cards Model', function () {
 
             expect(database.query).toHaveBeenCalledWith(jasmine.any(String), ['random', '1', 'Title', 'Some text', 'Max', 'todo', '3']);
         });
-    });
+    }); 
 
     describe('Remove', function () {
 
