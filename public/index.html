@@ -99,6 +99,9 @@
 
         <script type="text/template" id="card-template">
             <a href="#<%- board %>/cards/<%- id %>" class="card" draggable="true">
+                <% if (estimate) { %>
+                    <span class="card-estimate"><%- estimate %></span>
+                <% } %>
                 <% if (title) { %>
                     <%- title %>
                 <% } else { %>

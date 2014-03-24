@@ -82,3 +82,8 @@ h2 .pure-button {
 .card:hover {
     border-color: #bbb;
 }
+
+.card-estimate {
+    float: right;
+    color: #bbb;
+}
