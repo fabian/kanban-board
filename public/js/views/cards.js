@@ -14,7 +14,7 @@ var app = app || {};
         dragStart: function (e) {
             var dataTransfer = e.originalEvent.dataTransfer;
             dataTransfer.effectAllowed = 'move';
-            dataTransfer.setData('text/x-card', this.model.get('id'));
+            dataTransfer.setData('text/x-card', '' + this.model.get('id'));
             dataTransfer.setDragImage(e.target, 30, 20);
             return true;
         },
