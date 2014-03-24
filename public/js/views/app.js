@@ -42,7 +42,7 @@ var app = app || {};
         dragDrop: function (e) {
             e.preventDefault();
             $(e.currentTarget).removeClass('column-stack-active');
-            var id = e.originalEvent.dataTransfer.getData('text/x-card'),
+            var id = e.originalEvent.dataTransfer.getData('text'),
                 card = this.model.get(id),
                 stack = $('.stack', e.currentTarget).attr('id')
                 status;
