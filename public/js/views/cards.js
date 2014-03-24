@@ -44,6 +44,7 @@ var app = app || {};
         template: _.template($('#card-form-template').html()),
         events: {
             'click #save-card': 'saveCard',
+            'keyup input, select': 'keyUp',
             'click #delete-card': 'deleteCard'
         },
         initialize: function (options) {
@@ -62,6 +63,11 @@ var app = app || {};
             this.$('#person').val(this.model.get('person'));
             this.$('#status').val(this.model.get('status'));
             this.$('#estimate').val(this.model.get('estimate'));
+        },
+        keyUp: function (event) {
+            if (event.keyCode == 13) {
+                this.saveCard();
+            }
         },
         saveCard: function (event) {
 
