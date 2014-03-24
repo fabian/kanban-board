@@ -5,19 +5,22 @@ var app = app || {};
 
     app.CardView = Backbone.View.extend({
         template: _.template($('#card-template').html()),
+        events: {
+            'dragstart': 'dragStart'
+        },
         initialize: function (options) {
             this.board = options.board;
+        },
+        dragStart: function (e) {
+            var dataTransfer = e.originalEvent.dataTransfer;
+            dataTransfer.effectAllowed = 'move';
+            dataTransfer.setData('text/x-card', this.model.get('id'));
+            dataTransfer.setDragImage(e.target, 30, 20);
+            return true;
         },
         render: function () {
             var data = this.model.toJSON();
             data.board = this.board;
-            this.$el.bind('dragstart', function (e) {
-                var dataTransfer = e.originalEvent.dataTransfer;
-                dataTransfer.effectAllowed = 'move';
-                dataTransfer.setData('text/x-card', data.id);
-                dataTransfer.setDragImage(e.target, 30, 20);
-                return true;
-            });
             this.$el.html(this.template(data));
         }
     });
@@ -26,7 +29,7 @@ var app = app || {};
         template: _.template($('#card-form-template').html()),
         events: {
             'click #save-card': 'saveCard',
-            'click #delete-card': 'deleteCard',
+            'click #delete-card': 'deleteCard'
         },
         initialize: function (options) {
             this.board = options.board;

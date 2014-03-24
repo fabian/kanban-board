@@ -6,7 +6,10 @@ var app = app || {};
     app.IndexView = Backbone.View.extend({
         template: _.template($('#index-template').html()),
         events: {
-            'click #add-card': 'createCard'
+            'click #add-card': 'createCard',
+            'dragover .column-stack': 'dragOver',
+            'dragenter .column-stack': 'dragEnter',
+            'drop .column-stack': 'dragDrop'
         },
         initialize: function (options) {
             this.board = options.board;
@@ -28,34 +31,33 @@ var app = app || {};
                 this.render();
             }, this);
         },
+        dragOver: function (e) {
+            e.preventDefault();
+            e.originalEvent.dataTransfer.dropEffect = 'move';
+        },
+        dragEnter: function (e) {
+            $('.column-stack').removeClass('column-stack-active');
+            $(e.currentTarget).addClass('column-stack-active');
+        },
+        dragDrop: function (e) {
+            e.preventDefault();
+            $(e.currentTarget).removeClass('column-stack-active');
+            var id = e.originalEvent.dataTransfer.getData('text/x-card'),
+                card = this.model.get(id),
+                stack = $('.stack', e.currentTarget).attr('id')
+                status;
+            if (stack == 'stack-progress') {
+                status = 'in_progress';
+            } else if (stack == 'stack-done') {
+                status = 'done';
+            } else {
+                status = 'todo';
+            }
+            card.set({status: status});
+            card.save();
+        },
         render: function () {
-            var model = this.model;
             this.$el.html(this.template({board: this.board}));
-            this.$('.column-stack').bind('dragover dragenter', function (e) {
-                e.preventDefault();
-                $(this).addClass('column-stack-active');
-            });
-            this.$('.column-stack').bind('dragleave', function (e) {
-                e.preventDefault();
-                $(this).removeClass('column-stack-active');
-            });
-            this.$('.column-stack').bind('drop', function (e) {
-                e.preventDefault();
-                $(this).removeClass('column-stack-active');
-                var id = e.originalEvent.dataTransfer.getData('text/x-card'),
-                    card = model.get(id),
-                    stack = $('.stack', this).attr('id')
-                    status;
-                if (stack == 'stack-progress') {
-                    status = 'in_progress';
-                } else if (stack == 'stack-done') {
-                    status = 'done';
-                } else {
-                    status = 'todo';
-                }
-                card.set({status: status});
-                card.save();
-            });
             if (this.model.length > 0) {
                 this.$('.message-no-cards').hide();
                 this.model.each(function (card) {
