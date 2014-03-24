@@ -1,5 +1,8 @@
 "use strict";
 
+/**
+ * The main model to access the Cards storage.
+ */
 var Cards = function (database) {
     this.database = database;
 };
