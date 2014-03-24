@@ -37,6 +37,8 @@ open coverage/lcov-report/index.html
 
 ## Deployment
 
+The project is ready to be deployed to [Heroku](http://www.heroku.com), however some additional commands are needed to activate all components.
+
 ```
 heroku addons:add heroku-postgresql:dev
 heroku config:set DATABASE_URL=postgres://...
