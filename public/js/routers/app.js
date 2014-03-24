@@ -3,7 +3,11 @@ var app = app || {};
 (function ($) {
     "use strict";
 
+    /**
+     * Generates a random board ID with 12 characters.
+     */
     function randomBoard() {
+
         var board = '';
         var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -14,11 +18,13 @@ var app = app || {};
         return board;
     }
 
+    /**
+     * Router to redirect to random board ID.
+     */
     app.AppRouter = Backbone.Router.extend({
         routes: {
             '': 'index'
         },
-
         index: function() {
             this.navigate(randomBoard(), {trigger: true});
         }
