@@ -10,7 +10,7 @@ var app = app || {};
         },
         initialize: function (options) {
             this.board = options.board;
-            this.socket = new WebSocket(location.origin.replace(/^http/, 'ws'));
+            this.socket = new WebSocket('ws://' + window.location.host);
             this.socket.onopen = _.bind(function () {
                 this.socket.send(this.board);
             }, this);
